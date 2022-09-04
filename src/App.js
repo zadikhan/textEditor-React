@@ -1,25 +1,71 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import Textform from './components/Textform';
+/* import About from './components/About'; */
+
+import React, { useState } from 'react';
+import Alert from "./components/Alert";
+
+/* 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+   // eslint-disable-next-line
+  Link,
+  
+} from "react-router-dom"; */
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const [mode, setDarkMode] = useState('light');
 
+  const [alert,setalert] = useState(null);
+
+  const showAlert = (message,type)=>{
+    setalert({
+      msg:message,
+      type:type
+    })
+    setTimeout(()=>{
+      setalert(null);
+    },1500)
+  }
+  const toggleMode = () => {
+    if (mode === "light") {
+      setDarkMode('dark');
+      document.body.style.backgroundColor = '#042743';
+      showAlert("dark mode has been enabled","success");
+    }
+    else {
+      setDarkMode('light');
+      document.body.style.backgroundColor = 'white';
+      showAlert("light mode has been enabled","success");
+    }
+  }
+
+  return (
+    <>
+    {/* <Router> */}
+
+    
+      <Navbar title="azam" mode={mode} toggleMode={toggleMode} />
+      <Alert alert={alert}/>
+      <div className="container my-3">
+     {/*  <Routes>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/"> */}
+            
+        <Textform showAlert={showAlert} mode={mode} heading="Enter the text to analyse" />
+         {/*  </Route>
+        </Routes> */}
+        </div>
+       {/*  </Router> */}
+      
+
+
+    </>
+  )
+}
 export default App;
