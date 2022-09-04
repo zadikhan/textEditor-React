@@ -48,7 +48,7 @@ function App() {
     {/* <Router> */}
 
     
-      <Navbar title="azam" mode={mode} toggleMode={toggleMode} />
+      <Navbar title="AK textEditor" mode={mode} toggleMode={toggleMode} />
       <Alert alert={alert}/>
       <div className="container my-3">
      {/*  <Routes>
